@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from rsave.in/Calculators/newinsurance.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Dec 2023 11:11:48 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.1.css" type="text/css" />
+<script src="formjs.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="formcss.css" type="text/css" />
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>   
+<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.4.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<script type="text/javascript">
+function Calculate()
+{
+
+//if(check==true) 
+//{ 
+          
+			// document.getElementById('tab4').className='on1';
+			// document.getElementById('tab1').className='off1';
+			// document.getElementById('tab2').className='off1';
+			/*document.getElementById('tab3').className='off1'; */
+			
+       // } 
+        	
+if(document.getElementById('hide').style.display=='block') 
+{	
+	
+document.getElementById('hide').style.display='none';
+
+}    	
+if(document.getElementById('benefits').style.display=='none') 
+{	
+	
+document.getElementById('benefits').style.display='block';
+
+}
+
+var CAge = document.getElementById("CAge").value;
+var Income = document.getElementById("Income").value;
+var IncomePer = document.getElementById("incomeper").value;
+var Liabilities = document.getElementById("liabilities").value;
+var goals = document.getElementById("goals").value;
+var Insurance = document.getElementById("insurance").value;
+
+var Years;
+Years = (85-CAge);
+
+var Expense; 
+Expense = Number(Income)*(Number(IncomePer)/100);
+var Power = Math.pow((1+(1.87/100)),-Years);
+
+var RHS;
+RHS = [(1-Number(Power))]/0.0187;
+
+var Exp;
+Exp =  Math.round(((Expense*12)*RHS));
+
+var Requirements;
+Requirements = Number(Number(Exp) + Number(Liabilities) + Number(goals))-Number(Insurance);
+
+document.getElementById('Age_display').innerHTML=CAge;
+document.getElementById('Expenses_display').innerHTML=Exp;
+document.getElementById('Outstanding_display').innerHTML=Liabilities;
+document.getElementById('Dependent_display').innerHTML=goals;
+document.getElementById('Insuarnce_display').innerHTML=Insurance;
+document.getElementById('Requirements_display').innerHTML=Requirements; 
+drawChart(Requirements,Insurance);
+}
+
+google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart(Requirements,Insurance) 
+	  {
+		  
+	
+		
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Shortfall',     parseInt(Requirements)],
+          ['Existing Cover',      parseInt(Insurance)],
+        
+        ]);
+		
+		
+
+        var options = {
+          title: 'Insurance Required'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+
+
+
+
+function Nextpage() 
+{
+ if(document.getElementById('hide2').style.display=='none') { 
+            document.getElementById('hide2').style.display='block'; 
+			/*document.getElementById('tab3').className='off1';*/
+			document.getElementById('tab1').className='off1';
+			document.getElementById('tab2').className='on1';
+			document.getElementById('tab4').className='off1';
+			
+        } 
+        	
+if(document.getElementById('hide').style.display=='block') {	
+	
+document.getElementById('hide').style.display='none';
+
+}
+
+}
+
+function Nextpage2() 
+{
+ if(document.getElementById('benefits').style.display=='none') { 
+            document.getElementById('benefits').style.display='block'; 
+			document.getElementById('tab4').className='on1';
+			document.getElementById('tab1').className='off1';
+			document.getElementById('tab2').className='off1';
+			/*document.getElementById('tab3').className='off1';*/
+			
+        } 
+        	
+if(document.getElementById('hide2').style.display=='block') {	
+	
+document.getElementById('hide2').style.display='none';
+
+}
+
+}
+
+/*function Nextpage2() 
+{
+ if(document.getElementById('hide3').style.display=='none') { 
+            document.getElementById('hide3').style.display='block'; 
+			document.getElementById('tab3').className='on1';
+			document.getElementById('tab1').className='off1';
+			document.getElementById('tab2').className='off1';
+			document.getElementById('tab4').className='off1';
+			
+        } 
+        	
+if(document.getElementById('hide2').style.display=='block') {	
+	
+document.getElementById('hide2').style.display='none';
+
+}
+
+}
+*/
+
+// function backpage() 
+// {
+//  if(document.getElementById('hide').style.display=='none') { 
+//             document.getElementById('hide').style.display='block'; 
+// 			/*document.getElementById('tab3').className='off1';*/
+// 			document.getElementById('tab1').className='on1';
+// 			document.getElementById('tab2').className='off1';
+// 			document.getElementById('tab4').className='off1';
+			
+//         } 
+        	
+// if(document.getElementById('hide2').style.display=='block') {	
+	
+// document.getElementById('hide2').style.display='none';
+
+// }
+
+// }
+
+// function backpage2() 
+// {
+//  if(document.getElementById('hide2').style.display=='none') { 
+//             document.getElementById('hide2').style.display='block';
+// 			/*document.getElementById('tab3').className='off1';*/
+// 			document.getElementById('tab1').className='off1';
+// 			document.getElementById('tab2').className='on1'; 
+// 			document.getElementById('tab4').className='off1';
+			
+//         } 
+        	
+// if(document.getElementById('benefits').style.display=='block') {	
+	
+// document.getElementById('benefits').style.display='none';
+
+// }
+
+// }
+
+
+// function backpage33() 
+// {
+
+//  if(document.getElementById('hide2').style.display=='none') { 
+//             document.getElementById('hide2').style.display='block';
+// 			document.getElementById('tab2').className='on1';
+// 			document.getElementById('tab1').className='off1';
+// 			/*document.getElementById('tab3').className='on1'; */
+// 			document.getElementById('tab4').className='off1';
+// 			document.getElementById('benefits').style.display='none';
+
+//         } 
+        	
+// if(document.getElementById('benefits').style.display=='block') {	
+	
+// document.getElementById('benefits').style.display='none';
+
+// }
+
+// }
+	
+	function backpage() 
+{
+ 	if(document.getElementById('hide').style.display=='none') { 
+		document.getElementById('hide').style.display='block'; 
+	}         	
+	if(document.getElementById('benefits').style.display=='block') {	
+		document.getElementById('benefits').style.display='none';
+	}
+}
+
+function backpage2() 
+{
+ 	if(document.getElementById('hide2').style.display=='none') { 
+ 		document.getElementById('hide2').style.display='block';
+ 	}   	
+	if(document.getElementById('benefits').style.display=='block') {		
+		document.getElementById('benefits').style.display='none';
+	}
+}
+function backpage33() 
+{        	
+	if(document.getElementById('benefits').style.display=='block') {	
+		document.getElementById('benefits').style.display='none';
+	}
+}
+	
+
+</script>
+
+</head>
+
+
+
+<body>
+
+
+
+<div id="hide" style="display:block; padding: 0 25px;">
+    <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">What is your spouse current Age ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="CAge" value="35" min="1" max="100" step="1" data-highlight="true">
+            </div>
+        </div>
+        <div class="clearfix"></div> 
+        <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">How much do you earn monthly ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="Income" value="10000" min="10000" max="1000000" step="10000" data-highlight="true">
+            </div>
+        </div>
+        <div class="clearfix"></div> 
+         <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">What percentage of your income do you spend towards your family’s monthly expenditure? (excluding EMIs or personal expenses) ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="incomeper" value="45" min="10" max="100" step="1" data-highlight="true">
+            </div>
+        </div> 
+        <div class="clearfix"></div> 
+        <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">By what percentage you think your earnings will increase yearly?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="incomegrow" value="10" min="0" max="100" step="1" data-highlight="true">
+            </div>
+        </div>
+        <div class="clearfix"></div> 
+        <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">What are your current liabilities or financial obligations ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="liabilities" value="50000" min="0" max="10000000" step="50000" data-highlight="true">
+            </div>
+        </div>
+        <div class="clearfix"></div> 
+        <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">What are your dependents goals requirements ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="goals" value="500000" min="0" max="10000000" step="100000" data-highlight="true">
+            </div>
+        </div>
+        <div class="clearfix"></div> 
+        <div class="col-md-12 bar_padding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <label for="slider-fill">If you have some insurance already, what is the sum assured ?</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                <input type="range" name="slider-fill" id="insurance" value="100000" min="0" max="3000000" step="100000" data-highlight="true">
+            </div>
+        </div>
+
+
+         <div class="col-md-12 nopadding resp_1080">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">             
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 resp_600 res_480_cal_hou">
+                <input type='submit' value='Calculate' class='form_button' onclick="Calculate()">
+            </div>
+        </div>
+                <span id='phpfmg_processing' style='display:none;'>
+                    <img id='phpfmg_processing_gif' src='admin1500.gif?mod=image&amp;func=processing' border=0 alt='Processing...'> <label id='phpfmg_processing_dots'></label>
+                </span>
+</div>
+
+
+
+<div id="benefits" class="col-md-12 col-xs-12" style="display:none;">
+
+<div class="col-md-6 col-sm-6 col-xs-12 resp_480_details">
+Current Age Of Spouse : <span id="Age_display"></span> Years
+<hr color="#C1C1C1" />
+PV Of Monthly Expenses : Rs.<span id="Expenses_display"></span>
+<hr color="#C1C1C1" />
+Outstanding loan: Rs.<span id="Outstanding_display"></span>
+<hr color="#C1C1C1" />
+Dependent Requirement : Rs.<span id="Dependent_display" style="color:#484f4e;"></span>
+<hr color="#C1C1C1" />
+Existing Insuarnce : Rs.<span id="Insuarnce_display" style="color:#484f4e; "></span>
+<hr color="#C1C1C1" />
+Insuarance Requirements : Rs.<span id="Requirements_display" style="color:#484f4e; "></span>
+<!-- <div class="button" onclick="backpage2()">Back</div> -->
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 pie_resp_600">
+<div id="piechart" class="piechart"></div>
+</div>
+ <div class="clearfix"></div>
+        <div class="col-md-12 nopadding">           
+            <div class="button result_back_btn res_480_back_btn" onclick="backpage()">Back</div>
+        </div>
+
+</div>
+
+
+
+
+</body>
+
+<!-- Mirrored from rsave.in/Calculators/newinsurance.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Dec 2023 11:11:48 GMT -->
+</html>

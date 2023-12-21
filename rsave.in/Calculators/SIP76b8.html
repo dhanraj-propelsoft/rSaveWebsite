@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from rsave.in/Calculators/SIP.html?wmode=transparent by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Dec 2023 11:11:51 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.4.1.css" type="text/css" />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="js/jquery.mobile-1.4.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+function Calculate()
+
+{
+ if(document.getElementById('benefits').style.display=='none') { 
+            document.getElementById('benefits').style.display='block'; 
+			
+        } 
+        	
+if(document.getElementById('hide').style.display=='block') {	
+	
+document.getElementById('hide').style.display='none';
+
+}
+
+
+
+var Returnn = document.getElementById("Return").value;
+var Years = document.getElementById("Installments").value;
+var SIP = document.getElementById("SIP").value;
+var convertmonthly;
+convertmonthly = Number(Returnn/12);
+var Return = Number(convertmonthly/100);
+var Power = Math.pow((1+Return),Years);
+var Investment = (SIP*Years);
+
+Total = Math.round((SIP)*[(Power-1)/(Return)]*(1+Return)) ;
+
+var Earnings = (Total-Investment);
+document.getElementById('v1-five').innerHTML=Total;
+document.getElementById('SIP_display').innerHTML=SIP.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+document.getElementById('Return_display').innerHTML=Returnn;
+document.getElementById('Installments_display').innerHTML=Years;
+document.getElementById('Investment_display').innerHTML=Investment;
+document.getElementById('Earnings_display').innerHTML=Earnings;
+drawChart(Investment,Earnings); 
+
+}
+
+function defaultpage() 
+{
+ if(document.getElementById('benefits').style.display=='block') { 
+            document.getElementById('benefits').style.display='none'; 
+			
+        } 
+        	
+if(document.getElementById('hide').style.display=='none') {	
+	
+document.getElementById('hide').style.display='block';
+
+}	
+	
+	
+	}
+
+
+
+ google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart(Investment,Earnings) 
+	  {
+		  
+		  var SIP = document.getElementById("SIP").value;
+		 var numberschart; 
+		  numberschart = Number(Investment);
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Investment',     parseInt(numberschart)],
+          ['Earning',      parseInt(Earnings)],
+        
+        ]);
+		
+		
+
+        var options = {
+          title: 'Your Result'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+
+</script>
+</head>
+
+<body>
+<div id="hide" style="display:block;">
+<div class="row nomargin">
+        <div class="col-md-12 nopadding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<label for="slider-fill">Investment Amount (&#8377;)</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<input type="range" name="slider-fill" id="SIP" value="1000" min="1000" max="100000" step="1000" data-highlight="true">
+            </div>
+        </div>
+        <div class="col-md-12 nopadding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<label for="slider-fill">Expected Interest Rate(%)</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<input type="range" name="slider-fill" id="Return" value="10" min="5" max="15" step="1" data-highlight="true">
+            </div>
+        </div>	
+        <div class="col-md-12 nopadding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<label for="slider-fill">Duration (months)</label>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<input type="range" name="slider-fill" id="Installments" value="12" min="12" max="360" step="12" data-highlight="true">
+            </div>
+        </div>
+        <div class="col-md-12 nopadding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<div class="button" onclick="Calculate()">Calculate</div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6"></div>
+        </div>
+    </div>  
+</div>
+<div id="benefits" style="display:none;">
+	<div class="row nomargin">
+        <div class="col-md-12 nopadding">
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+            	<div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>SIP Amount : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	&#8377; <Span ID="SIP_display"></Span>
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+                <div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>Expected Interest Rate : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	<span ID="Return_display"></span> %
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+                <div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>Number of Installments : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	<span ID="Installments_display"></span>  Months
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+                <div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>The future value of your SIP - Based on investment will be : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	&#8377; <span id="v1-five"></span>
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+                <div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>Your Investment : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	&#8377; <span ID="Investment_display"></span>
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+                <div class="row nomargin">
+                	<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+                    	<label>Your Earnings : </label>
+                   	</div>	
+                    <div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+                    	&#8377; <span ID="Earnings_display"></span>
+                    </div>	
+                </div>
+                <hr color="#C1C1C1" />
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 nopadding">            	
+            	<div class="clearfix"></div>
+            	<div id="piechart" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 nopadding">        	
+            <div class="button" onclick="defaultpage()">Back</div>
+       	</div>	
+    </div>
+</div>
+</body>
+
+<!-- Mirrored from rsave.in/Calculators/SIP.html?wmode=transparent by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Dec 2023 11:11:51 GMT -->
+</html>
