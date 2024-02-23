@@ -13,71 +13,73 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 <script type="text/javascript">
-function Calculate()
-{      	
-	if(document.getElementById('benefits').style.display=='none'){	
-		document.getElementById('benefits').style.display='block';
-	}
-	if(document.getElementById('hide').style.display=='block') {		
-		document.getElementById('hide').style.display='none';
-	}
-var Years = document.getElementById("Years").value;
-var Cost = document.getElementById("Cost").value;
-var PV = document.getElementById("PV").value;
-var inflation = document.getElementById("inflation").value;
-var ror = document.getElementById("ror").value; 
-
-
-var Power = Math.pow((1+(ror/100)),Years);
-var hike = Math.pow((1+(inflation/100)),Years);
-var rounding = (ror/1200);
-var Powerr = Math.pow((1+rounding),Years*12);
-
-
-var CostFV;
-CostFV = Math.round((Cost*hike));
-
-var FVexisting;
-FVexisting = Math.round(PV*Power);
-
 var FV;
-FV=(CostFV-FVexisting);
+var FVexisting;
+function Calculate()
+{   
+    // if(document.getElementById('benefits').style.display=='none'){	
+	// 	document.getElementById('benefits').style.display='block';
+	// }
+	// if(document.getElementById('hide').style.display=='block') {		
+	// 	document.getElementById('hide').style.display='none';
+	// }
+    var Years = document.getElementById("Years").value;
+    var Cost = document.getElementById("Cost").value;
+    var PV = document.getElementById("PV").value;
+    var inflation = document.getElementById("inflation").value;
+    var ror = document.getElementById("ror").value; 
 
-var SIP;
-SIP=Math.round([(FV*rounding)/(Powerr-1)]);
 
-document.getElementById('Years_display').innerHTML=Years;
-document.getElementById('Cost_display').innerHTML=CostFV;
-document.getElementById('FVexisting_display').innerHTML=FVexisting;
-document.getElementById('SIP_display').innerHTML=SIP;
-drawChart(FV,FVexisting); 
+    var Power = Math.pow((1+(ror/100)),Years);
+    var hike = Math.pow((1+(inflation/100)),Years);
+    var rounding = (ror/1200);
+    var Powerr = Math.pow((1+rounding),Years*12);
 
-}
 
- google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart(FV,FVexisting) 
-	  {
-		  
-	
-		 var numberschart; 
-		  numberschart = Number(FV);
+    var CostFV;
+    CostFV = Math.round((Cost*hike));
+
+    FVexisting = Math.round(PV*Power);
+
+    FV=(CostFV-FVexisting);
+    
+    var SIP;
+    SIP=Math.round([(FV*rounding)/(Powerr-1)]);
+
+    document.getElementById('Years_display').innerHTML=Years;
+    document.getElementById('Cost_display').innerHTML=CostFV;
+    document.getElementById('FVexisting_display').innerHTML=FVexisting;
+    document.getElementById('SIP_display').innerHTML=SIP;
+    drawChart(FV,FVexisting); 
+    
+    }
+
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(function() {
+        drawChart(FV, FVexisting);
+    });
+    function drawChart(FV,FVexisting) 
+    {
+
+
+        var numberschart; 
+        numberschart = Number(FV);
+        console.log(numberschart+", "+FVexisting);
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Shortfall',     parseInt(numberschart)],
-          ['Provision Made',      parseInt(FVexisting)],
-        
+            ['Task', 'Hours per Day'],
+            ['Shortfall',     parseInt(numberschart)],
+            ['Provision Made',      parseInt(FVexisting)],
         ]);
-		
-		
 
-        var options = {
-          title: 'Child Education'
-        };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-      }
+
+    var options = {
+        title: 'Child Education'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+}
 
 function Nextpage() 
 {         	
@@ -148,7 +150,8 @@ function backpage33()
 </head>
 
 <body>
-
+<div class="row nomargin">
+    <div class="col-md-7 col-sm-7 col-xs-12 nopadding   ">
 <div id="hide" style="display:block;padding: 0 15px;">
 	<div class="row nomargin">
         <div class="col-md-12 bar_padding">
@@ -156,7 +159,7 @@ function backpage33()
             	<label for="slider-fill">After how many years will your child begin higher studies ?</label>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-            	<input type="range" name="slider-fill" id="Years" value="3" min="1" max="30" step="1" data-highlight="true">
+            	<input type="range" name="slider-fill" id="Years" value="3" min="1" max="30" step="1" data-highlight="true" onchange="Calculate()">
             </div>
         </div>
         <div class="clearfix"></div>
@@ -165,7 +168,7 @@ function backpage33()
             	<label for="slider-fill">How much do does the higher Education cost today ?</label>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-            	<input type="range" name="slider-fill" id="Cost" value="200000" min="100000" max="300000000" step="100000" data-highlight="true">
+            	<input type="range" name="slider-fill" id="Cost" value="200000" min="100000" max="300000000" step="100000" data-highlight="true" onchange="Calculate()">
             </div>
         </div>	    
         <div class="clearfix"></div>
@@ -174,7 +177,7 @@ function backpage33()
             	<label for="slider-fill">How much money can you set aside for your child’s higher studies at the moment ?</label>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-            	<input type="range" name="slider-fill" id="PV" value="50000" min="0" max="3000000" step="100000" data-highlight="true">
+            	<input type="range" name="slider-fill" id="PV" value="50000" min="0" max="3000000" step="100000" data-highlight="true" onchange="Calculate()">
             </div>
         </div>
         <div class="clearfix"></div>
@@ -183,7 +186,7 @@ function backpage33()
             	<label for="slider-fill">Inflation Rate</label>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-            	<input type="range" name="slider-fill" id="inflation" value="7" min="0" max="20" step="1" data-highlight="true">
+            	<input type="range" name="slider-fill" id="inflation" value="7" min="0" max="20" step="1" data-highlight="true" onchange="Calculate()">
             </div>
         </div>	
         <div class="clearfix"></div>
@@ -192,17 +195,17 @@ function backpage33()
             	<label for="slider-fill">Rate Of Return</label>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-            	<input type="range" name="slider-fill" id="ror" value="9" min="0" max="60" step="1" data-highlight="true">
+            	<input type="range" name="slider-fill" id="ror" value="9" min="0" max="60" step="1" data-highlight="true" onchange="Calculate()">
             </div>
         </div>   
         <div class="clearfix"></div>    
-        <div class="col-md-12 nopadding resp_1080">
+        <!-- <div class="col-md-12 nopadding resp_1080">
             <div class="col-md-6 col-sm-6 col-xs-12 nopadding">             
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6 res_480_cal">
                 <input type='submit' value='Calculate' class='form_button' onclick="Calculate()">
             </div>
-        </div>
+        </div> -->
 
     </div>
     <div class="clearfix"></div>
@@ -216,6 +219,7 @@ function backpage33()
          	</span>
         </div>
     </div>	
+</div>
 </div>
 <!--<div id="hide3" style="display:none;">
 
@@ -301,10 +305,11 @@ function backpage33()
 
 <iframe name="submitToFrame" id="submitToFrame" src="javascript:false" style="position:absolute;top:-10000px;left:-10000px;" /></iframe>
 </div>-->
-<div id="benefits" style="display:none;">
+<div class="col-md-5 col-sm-5 col-xs-12 nopadding   ">
+<div id="benefits" style="display:block;">
 	<div class="row nomargin">
         <div class="col-md-12 result_bar">
-            <div class="col-md-6 col-sm-6 col-xs-12 nopadding resp_480_result">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding resp_480_result">
             	<div class="row nomargin">
                 	<div class="col-md-6 col-sm-6 col-xs-9 nopadding">
                     	<label>Years Left : </label>
@@ -341,20 +346,24 @@ function backpage33()
                     </div>	
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 nopadding pie_resp_600">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding pie_resp_600">
             	<div id="piechart" class="piechart"></div>
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="col-md-12 nopadding">        	
+        <!-- <div class="col-md-12 nopadding">        	
             <div class="button" onclick="backpage()">Back</div>
-       	</div>	
+       	</div>	 -->
     </div>
+</div>
+</div>
 </div>
 
 
-
-
+<script>
+//document.getElementById("benefits").addEventListener("load", Calculate);
+document.addEventListener("DOMContentLoaded", Calculate);
+</script>
 </body>
 
 <!-- Mirrored from rsave.in/Calculators/neweducation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Dec 2023 11:11:48 GMT -->

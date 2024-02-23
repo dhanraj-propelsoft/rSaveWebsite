@@ -68,6 +68,18 @@
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
 	border-top:none;
 	}
+    #header {
+        display: flex;
+        justify-content: center; /* Horizontally center the content */
+    }
+    .rs-fixed-header {
+        position: fixed;
+        top:0;
+        z-index: 100;
+        text-align: center;
+        background-color: white;
+        /* width: 100% !important; */
+    }
 	</style>
 	
 	 <script>
@@ -86,9 +98,10 @@
 <!-- begin container -->
 <div id="wrap">
 	<!-- begin header -->
-    <header id="header" class="container clearfix">
+    <header id="header" class="container clearfix ">
     	<!-- begin logo -->
-        <h1 id="logo"><a href="index-2.html"><img src="image/Companylogo.png" alt="Your Company Name"></a></h1>
+        <div class="rs-fixed-header">
+        <h1 id="logo"><a href="index.html"><img src="image/Companylogo.png" alt="Your Company Name"></a></h1>
         <!-- end logo -->
         
         <!-- begin navigation wrapper -->
@@ -96,17 +109,15 @@
         
      <div class="row" >
 		<ul class="login">
-			<a href="http://wealth.rsave.in/" target="_blank"><li>CLIENT LOGIN</li></a>
-			<a href="#" target="_blank"><li>INVESTOR SIGNUP</li></a>
+			<a href="https://rsave.fundexpert.net/" target="_blank"><li>CLIENT LOGIN</li></a>
+			<!-- <a href="#" target="_blank"><li>INVESTOR SIGNUP</li></a> -->
 		</ul>
 	 </div>
 	 
 	   <div class="row">
 		<nav id="nav">
             <ul id="navlist" class="clearfix">
-			<li class="current"><a href="index-2.html">Home</a></li>
-			<li><a href="about_us.html">About Us</a></li>
-                <li><a href="#" rel="submenu1">Services</a>
+			    <li><a href="#" rel="submenu1">Services</a>
                     <ul id="submenu1" class="ddsubmenustyle">
                         <li><a href="financial_planning.html">Financial Planning</a></li>
                         <li><a href="wealth_management.html">Wealth Management</a></li>
@@ -121,9 +132,9 @@
                         <li><a href="#">Investments</a>
 							<ul>
 								<li><a href="mutual_fund.html">Mutual Fund</a></li>
-                                <li><a href="#">Equity</a></li>
+                                <li><a href="equity.html">Equity</a></li>
                                 <li><a href="fixed_deposits.html">Fixed Deposit</a></li>
-								<li><a href="#">Postal Services</a></li>
+								<li><a href="postal_services.html">Postal Services</a></li>
 							</ul>
 						</li>
 						<li><a href="#">Bonds</a>
@@ -140,7 +151,7 @@
                         <li><a href="#">Insurance</a>
 							<ul>
 								<li><a href="life_insurance.html">Life Insurance</a></li>
-                                        <li><a href="#">Term Insurance</a></li>
+                                        <li><a href="term_insurance.html">Term Insurance</a></li>
                                         <li><a href="general_insurance.html">General Insurance</a></li>
 										
 							</ul>
@@ -173,13 +184,13 @@
 						<li><a href="custom_goal.html">Custom Goals</a></li>
                     </ul>
                 </li>
-               <li><a href="#" rel="submenu3">Resources</a>
+               <!-- <li><a href="#" rel="submenu3">Resources</a>
                     <ul id="submenu3" class="ddsubmenustyle">
                         <li><a href="mutual_fund_forms.html">Mutual Fund Forms</a></li>
                         <li><a href="financial_calculators.html">Financial Calculators</a></li>
                     </ul>
-                </li>
-               
+                </li> -->
+                <li><a href="about_us.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -189,12 +200,12 @@
         <!-- end navigation -->
         </div>
         <!-- end navigation wrapper -->
-  
+        </div>
     </header>
     <!-- end header -->
 	
     <!-- begin slider -->
-    <section id="">
+    <section id="" style="top: 100px; position: relative;">
         <div id="flexslider-home" class="flex-container">
             <div class="flexslider">
                 <ul class="slides">
@@ -302,7 +313,7 @@
       </section>
 	
         <!-- begin intro -->
-        <section>
+        <!-- <section>
           <div class="col-md-4 iframe-resp">
             <div style="border: 2px solid rgba(255, 0, 0, 0.65);" >
             <h3 class="about_heading">NFO</h3>
@@ -325,7 +336,7 @@
                 </div>
            
             <div class="clear"></div>
-        </section>
+        </section> -->
 
         <!-- end intro -->
         
@@ -339,7 +350,7 @@
        
                 <div class="col-md-2 col-sm-4 col-sm-6 float-left">
                     <div class="iconbox applications" >
-                        <a href="https://www.rbi.org.in/home.aspx" target="_blank">
+                        <a href="https://www.rbi.org.in/home.aspx" onclick='window.open("https://www.rbi.org.in/home.aspx", "", "width=700,height=450");' target="_blank">
                         <img src="image/rbi.png" />
                             <h3 class="iconbox-title">RBI Bonds </h3>
                            
@@ -399,7 +410,7 @@
        
                 <div class="col-md-2 col-sm-4 col-sm-6 float-left">
                     <div class="iconbox iphone">
-                        <a href="https://www.licindia.in/Home/Pay-Premium-Online" target="_blank">
+                        <a href="https://www.licindia.in/Home/Pay-Premium-Online" onclick='window.open("https://www.licindia.in/Home/Pay-Premium-Online", "", "width=700,height=450");' target="_blank">
                         <img src="image/pay.png" />
                             <h3 class="iconbox-title">Pay LIC Premium</h3>
                             
@@ -466,7 +477,7 @@
         
         
         <!-- begin latest posts -->
-         <section class="col-md-12">
+         <!-- <section class="col-md-12">
     <div class="col-md-6 iframe-resp">
       <div style="border: 2px solid rgba(255, 0, 0, 0.65);">
                <h3 class="about_heading">Market</h3>
@@ -487,7 +498,7 @@
     
     
    
-        </section>
+        </section> -->
 
      
        
@@ -505,7 +516,7 @@
           <div class="container clearfix" >
       <div class="col-md-8">
             
-          <div class="col-md-6 float-left">
+          <!--<div class="col-md-6 float-left">
               <h3 style="color:#4d70b1; text-align:center;">Important Links</h3>
               <div class="col-md-6 float-left">
                 <ul >
@@ -513,7 +524,7 @@
                    <li> <a href="https://www.karvymfs.com/karvy/fatcahome.aspx" target="_blank">KARVY</a></li>
                    <li><a href="https://online.franklintempletonindia.com/aspx_app/Investors/fatca/Inv_FatcaDetails.aspx" target="_blank">FRANKLIN</a></li>
                   <li><a href="https://www.sundarambnpparibasfs.in/web/service/fatca/" target="_blank">SUNDARAM</a></li>
-                            <!--<li><a href="returns.html">MF Performance</a></li>-->
+                            --><!--<li><a href="returns.html">MF Performance</a></li>--><!--
                 </ul>
               </div>
               
@@ -525,7 +536,7 @@
                   <a href="http://passportindia.gov.in/AppOnlineProject/statusTracker/trackStatusInpNew" target="_blank"><li>Passport</li></a>
                 </ul>
               </div>
-          </div>
+          </div>-->
           <div class="col-md-6 float-left">
                       <h3 style="color:#4d70b1; text-align:center;">Products</h3>
             <div class="col-md-7 float-left">
@@ -572,10 +583,10 @@
         <div id="footer-bottom">
         	<div class="container clearfix">
                 <div class="one-half">
-                    <p>R Save <br>Designed and Developed by <a href="http://optimumfintech.com/">Optimum Financial Solutions Pvt. Ltd.</a></p>
+                    <p>R Save <br>Powered by Propel Soft.</p>
                 </div>
         
-                <div class="one-half column-last">
+                <!-- <div class="one-half column-last">
                     <ul class="social-links">
                         <li class="twitter"><a href="#" title="Twitter" target="_blank">Twitter</a></li>
                         <li class="facebook"><a href="#" title="Facebook" target="_blank">Facebook</a></li>
@@ -583,7 +594,7 @@
                         <li class="linkedin"><a href="#" title="LinkedIn" target="_blank">LinkedIn</a></li>
                         
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- end footer bottom -->
